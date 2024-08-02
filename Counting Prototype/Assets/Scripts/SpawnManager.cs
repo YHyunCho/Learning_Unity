@@ -7,9 +7,16 @@ public class SpawnManager : MonoBehaviour
     public GameObject dropPrefab;
 
     public float spawnRange = 19;
+    private float startDelay = 3;
+    private float spawnInterval = 2;
 
     // Start is called before the first frame update
     void Start()
+    {
+        InvokeRepeating("SpawnObject", startDelay, spawnInterval);
+    }
+
+    private void SpawnObject()
     {
         Instantiate(dropPrefab, GenerateSpawnPosition(), dropPrefab.transform.rotation);
     }
