@@ -5,8 +5,9 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject dropPrefab;
+    public GameObject bird;
 
-    public float spawnRange = 19;
+    public float spawnRange = 18;
     private float startDelay = 3;
     private float spawnInterval = 2;
 
@@ -25,7 +26,7 @@ public class SpawnManager : MonoBehaviour
     {
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
 
-        Vector3 randomPos = new Vector3(0, 14, spawnPosZ);
+        Vector3 randomPos = new Vector3(-3, 16, spawnPosZ);
 
         return randomPos;
     }
