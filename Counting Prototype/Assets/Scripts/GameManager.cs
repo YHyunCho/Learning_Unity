@@ -20,10 +20,4 @@ public class GameManager : MonoBehaviour
         Count += 1;
         CounterText.text = "Count : " + Count;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Count += 1;
-    //    CounterText.text = "Count : " + Count;
-    //}
 }

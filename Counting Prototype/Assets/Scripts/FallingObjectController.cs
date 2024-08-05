@@ -4,26 +4,17 @@ using UnityEngine;
 
 public class FallingObjectController : MonoBehaviour
 {
-    private GameManager gameManager;
 
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        //if (transform.position.y < -1)
-        //{
-        //    Destroy(gameObject);
-        //}
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Bottom"))
+        if (other.gameObject.CompareTag("Ground"))
         {
-            gameManager.UpdateScore();
+            Destroy(gameObject);
         }
     }
 }

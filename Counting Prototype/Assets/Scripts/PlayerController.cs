@@ -5,20 +5,27 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    private GameManager gameManager;
+
     public float speed;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        playerRb.AddForce(Vector3.right * horizontalInput * speed);
+        playerRb.AddForce(Vector3.forward * horizontalInput * speed);
         //transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gameManager.UpdateScore();
+        Destroy(other.gameObject);
     }
 }
