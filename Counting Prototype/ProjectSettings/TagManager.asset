@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Bottom
+  - lb_bird
+  - Fresh
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
 
     public float speed;
+    private bool isFishFresh;
 
     void Start()
     {
@@ -27,7 +28,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gameManager.UpdateScore();
+        if(other.gameObject.CompareTag("Fresh"))
+        {
+            isFishFresh = true;
+        } else
+        {
+            isFishFresh = false;
+        }
+
+        gameManager.UpdateScore(isFishFresh);
+
         Destroy(other.gameObject);
     }
 

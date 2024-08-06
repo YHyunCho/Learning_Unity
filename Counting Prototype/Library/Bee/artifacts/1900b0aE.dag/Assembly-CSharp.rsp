@@ -367,7 +367,6 @@
 "Assets/Scripts/FlightOfBird.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/PlayerController.cs"
-"Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
 /deterministic
 /optimize+
