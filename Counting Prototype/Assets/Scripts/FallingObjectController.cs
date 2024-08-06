@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class FallingObjectController : MonoBehaviour
 {
-
-    private void Start()
+    private void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
+        if (transform.position.y < -3)
         {
             Destroy(gameObject);
         }

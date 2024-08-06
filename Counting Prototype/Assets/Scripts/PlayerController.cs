@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private GameManager gameManager;
-    private float sideBound = 18.7f;
 
     public float speed;
 
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
         //playerRb.AddForce(Vector3.forward * horizontalInput * speed, ForceMode.Impulse);
         transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
 
-        CheckOutOfBound(sideBound);
+        CheckOutOfBound();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,15 +31,15 @@ public class PlayerController : MonoBehaviour
         Destroy(other.gameObject);
     }
 
-    private void CheckOutOfBound(float bound)
+    private void CheckOutOfBound()
     {
-        if (transform.position.z > bound)
+        if (transform.position.z > gameManager.rightBound)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, bound);
+            transform.position = new Vector3(transform.position.x, transform.position.y, gameManager.rightBound);
         }
-        if (transform.position.z < -bound)
+        if (transform.position.z < gameManager.leftBound)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -bound);
+            transform.position = new Vector3(transform.position.x, transform.position.y, gameManager.leftBound);
         }
     }
 }

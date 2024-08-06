@@ -19,5 +19,10 @@ public class FlightOfBird : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        if (transform.position.z > 55 || transform.position.z < -33)
+        {
+            Destroy(gameObject);
+        }
     }
 }

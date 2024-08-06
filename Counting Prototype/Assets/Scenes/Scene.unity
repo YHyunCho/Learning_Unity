@@ -1242,6 +1242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropPrefab: {fileID: 3910279526956005142, guid: a40b3066e3400fb46a35561a4df65c8f, type: 3}
+  bird: {fileID: 0}
   spawnRange: 19
 --- !u!4 &422640817
 Transform:
@@ -2184,7 +2185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2475,7 +2476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100092, guid: 91da67b32e5c13648a459e093ac1acb6, type: 3}
       propertyPath: m_Name
-      value: lb_robinHQ
+      value: Bird
       objectReference: {fileID: 0}
     - target: {fileID: 400092, guid: 91da67b32e5c13648a459e093ac1acb6, type: 3}
       propertyPath: m_LocalScale.x

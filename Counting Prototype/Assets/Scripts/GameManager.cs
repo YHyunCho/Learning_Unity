@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public Text CounterText;
 
+    public float leftBound = -14.37f;
+    public float rightBound = 27.63f;
+
     private int Count = 0;
 
     private void Start()
