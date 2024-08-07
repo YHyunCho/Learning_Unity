@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class FallingObjectController : MonoBehaviour
 {
-    private void Update()
+    private GameManager gameManager;
+    private int playerLives = 3;
+
+    private void Start()
     {
-        if (transform.position.y < -3)
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
         {
+            if(gameObject.CompareTag("Fresh"))
+            {
+                gameManager.UpdatePlayerLives();
+            }
             Destroy(gameObject);
         }
     }
