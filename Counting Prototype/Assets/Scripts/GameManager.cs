@@ -4,21 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI CounterText;
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI guideTitleText;
+    public TextMeshProUGUI guideText;
+    public TextMeshProUGUI resultText;
+    public Text gameOverText;
+    public Text titleText;
+
+    public GameObject board;
+    public GameObject gameoverBoard;
     public GameObject heart;
     public GameObject mainLight;
+
     public Camera mainCamera;
+
     public Button gameStartButton;
     public Button howToPlayButton;
+    public Button closeButton;
+    public Button restartButton;
 
     public GameObject[] birds;
     public GameObject[] fishes;
-    public GameObject[] hearts;
 
     private Vector3[] birdPos = { new Vector3(13.3f, 22.62f, -13.49f), new Vector3(13.3f, 18.91f, 32.75f) };
     private Vector3 cameraPos = new Vector3(33.9f, 22.6f, 8.7f);
@@ -29,7 +39,7 @@ public class GameManager : MonoBehaviour
     private int[] direction = { 0, 180 };
     private float birdSpawnInterval = 4;
     private int Count = 0;
-    private int playerLives = 3;
+    private int playerDead;
 
     public float cameraRotateSpeed;
     public float cameraMoveSpeed;
@@ -43,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         Count = 0;
-        playerLives = 3;
+        playerDead = 3;
 
         gameStartButton.gameObject.SetActive(false);
         howToPlayButton.gameObject.SetActive(false);
@@ -82,35 +92,60 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Count -= 1;
+            UpdatePlayerLives();
         }
-        CounterText.text = "Count : " + Count;
+        CounterText.text = "Fish : " + Count;
     }
 
     public void UpdatePlayerLives()
     {
-        playerLives -= 1;
+        heart.transform.GetChild(playerDead-1).gameObject.SetActive(false);
+        playerDead -= 1;
 
-        if (playerLives == 0)
+        if (playerDead == 0)
         {
             GameOver();
-        }
-    }
-
-    public void CheckPlayerLives()
-    {
-        Destroy(hearts[playerLives - 1].gameObject);
-        playerLives -= 1;
-
-        if (playerLives == 0)
-        {
-            isGameActive = false;
         }
     }
 
     public void GameOver()
     {
         isGameActive = false;
+
+        gameoverBoard.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
+        resultText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+
+        resultText.text = "You've caught " + Count + " fresh fish!";
+    }
+
+    public void OnClickHowToPlayButton()
+    {
+        titleText.gameObject.SetActive(false);
+        gameStartButton.gameObject.SetActive(false);
+        howToPlayButton.gameObject.SetActive(false);
+
+        board.gameObject.SetActive(true);
+        guideTitleText.gameObject.SetActive(true);
+        guideText.gameObject.SetActive(true);
+        closeButton.gameObject.SetActive(true);
+    }
+
+    public void OnClickCloseButton()
+    {
+        titleText.gameObject.SetActive(true);
+        gameStartButton.gameObject.SetActive(true);
+        howToPlayButton.gameObject.SetActive(true);
+
+        board.gameObject.SetActive(false);
+        guideTitleText.gameObject.SetActive(false);
+        guideText.gameObject.SetActive(false);
+        closeButton.gameObject.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

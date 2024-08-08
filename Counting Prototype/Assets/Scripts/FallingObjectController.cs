@@ -5,7 +5,6 @@ using UnityEngine;
 public class FallingObjectController : MonoBehaviour
 {
     private GameManager gameManager;
-    private int playerLives = 3;
 
     private void Start()
     {
@@ -16,7 +15,7 @@ public class FallingObjectController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            if(gameObject.CompareTag("Fresh"))
+            if(gameManager.isGameActive && gameObject.CompareTag("Fresh"))
             {
                 gameManager.UpdatePlayerLives();
             }

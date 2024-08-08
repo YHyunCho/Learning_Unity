@@ -1616,7 +1616,7 @@ GameObject:
   - component: {fileID: -2759828129595487486}
   m_Layer: 0
   m_Name: lb_sparrowHQ
-  m_TagString: lb_bird
+  m_TagString: Bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

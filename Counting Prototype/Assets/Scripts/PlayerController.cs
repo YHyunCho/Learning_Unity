@@ -4,40 +4,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody playerRb;
     private GameManager gameManager;
 
-    public float speed;
+    private float speed = 25;
     private bool isFishFresh;
 
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        if(gameManager.isGameActive)
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
 
-        //playerRb.AddForce(Vector3.forward * horizontalInput * speed, ForceMode.Impulse);
-        transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
 
-        CheckOutOfBound();
+            CheckOutOfBound();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Fresh"))
+        if (gameManager.isGameActive)
         {
-            isFishFresh = true;
-        } else
-        {
-            isFishFresh = false;
+            if (other.gameObject.CompareTag("Fresh"))
+            {
+                isFishFresh = true;
+            }
+            else
+            {
+                isFishFresh = false;
+            }
+
+            gameManager.UpdateScore(isFishFresh);
         }
-
-        gameManager.UpdateScore(isFishFresh);
-
+        
         Destroy(other.gameObject);
     }
 
