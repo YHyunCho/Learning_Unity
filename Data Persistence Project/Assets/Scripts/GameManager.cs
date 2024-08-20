@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        LoadNameAndScore();
     }
 
     public void UpdateBestScore(int currentScore)
@@ -28,6 +31,41 @@ public class GameManager : MonoBehaviour
         {
             bestScore = currentScore;
             bestUserName = userName;
+        }
+
+        SaveNameAndScore();
+    }
+
+    [System.Serializable]
+    class SaveHighestScore
+    {
+        public int highestScore;
+        public string userName;
+    }
+
+    public void SaveNameAndScore()
+    {
+        SaveHighestScore data = new SaveHighestScore();
+
+        data.highestScore = bestScore;
+        data.userName = bestUserName;
+
+        string json = JsonUtility.ToJson(data);
+
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void LoadNameAndScore()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveHighestScore data = JsonUtility.FromJson<SaveHighestScore>(json);
+
+            bestUserName = data.userName;
+            bestScore = data.highestScore;
         }
     }
 }

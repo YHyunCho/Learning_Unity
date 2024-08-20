@@ -11,6 +11,15 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     public InputField inputName;
+    public Text bestScoreText;
+
+    private void Start()
+    {
+        if (GameManager.Instance.bestUserName != null)
+        {
+            bestScoreText.text = $"BEST SCORE : {GameManager.Instance.bestUserName} : {GameManager.Instance.bestScore}";
+        }
+    }
 
     public void InputUserName()
     {
